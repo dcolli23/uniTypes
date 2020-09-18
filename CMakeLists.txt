@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project(<PROJECT_NAME> VERSION 0.0.1 LANGUAGES CXX)
+project(uniTypes VERSION 0.0.1 LANGUAGES CXX)
 
 #---------------------------------------------------------------------------------------------------
 # Googletest setup
@@ -34,10 +34,10 @@ endif(BUILD_TESTS)
 # Find files for this repository - this needs to be updated for every new src file.
 #---------------------------------------------------------------------------------------------------
 set(SOURCES
-    <source files here>
+    
 )
 
-set(LIBRARY_NAME <project name here>) # Default name for library built from src
+set(LIBRARY_NAME uniTest) # Default name for library built from src
 
 #---------------------------------------------------------------------------------------------------
 # Library linking flags.
