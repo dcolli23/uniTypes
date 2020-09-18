@@ -10,4 +10,11 @@ fi
 
 cmake -DRUN_TESTS=ON ..
 make
-./test_main
+
+# Run the test suites.
+if [ -f test_main ]
+then
+  ./test_main
+else
+  echo "Build failed!"
+fi
