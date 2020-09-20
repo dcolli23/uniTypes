@@ -31,45 +31,21 @@ if (BUILD_TESTS)
                   EXCLUDE_FROM_ALL)
 endif(BUILD_TESTS)
 #---------------------------------------------------------------------------------------------------
-# Find files for this repository - this needs to be updated for every new src file.
+# Find files for this repository
 #---------------------------------------------------------------------------------------------------
-set(SOURCES
-    
-)
 
 set(LIBRARY_NAME uniTest) # Default name for library built from src
 
 #---------------------------------------------------------------------------------------------------
-# Library linking flags.
-#---------------------------------------------------------------------------------------------------
-
-# Uncomment if using cURL
-#set(MAIN_LIB_FLAGS
-#    -lcurl
-#)
-
-#---------------------------------------------------------------------------------------------------
-# Build stuff - also change when needed.
+# Build stuff
 #---------------------------------------------------------------------------------------------------
 # Include headers.
 include_directories(include)
-include_directories(external/include)
 
-#include_directories( /usr/include/x86_64-linux-gnu ) # For using libcurl for HTTPS requests.
-
-# Compile to library.
-add_library(${LIBRARY_NAME} SHARED ${SOURCES})
-
-# Install the library where we want it.
-# NOTE: I'm leaving this off right now since it's just built in the build directory 
-#       but it might be worthwhile to do some investigation on best practices.
-#install(TARGETS ${LIBRARY_NAME} DESTINATION /usr/lib)
-
-# Generate the executable.
-add_executable(${LIBRARY_NAME}_main app/main.cpp ${SOURCES})
-
-# Link the libcurl libraries to our executable.
-#target_link_libraries(${LIBRARY_NAME}_main ${MAIN_LIB_FLAGS})
+# Install the library for the system.
+if(INSTALL_LIB_GLOBAL)
+  install(TARGETS ${LIBRARY_NAME} DESTINATION /usr/lib)
+endif(INSTALL_LIB_GLOBAL)
 
 # Link the googletest library with the executable
 if(BUILD_TESTS OR RUN_TESTS)
@@ -77,11 +53,3 @@ if(BUILD_TESTS OR RUN_TESTS)
   add_executable(test_main tests/main.cpp ${SOURCES})
   target_link_libraries(test_main gtest_main ${MAIN_LIB_FLAGS})
 endif(BUILD_TESTS OR RUN_TESTS)
-
-set_target_properties(
-  ${LIBRARY_NAME} ${LIBRARY_NAME}_main
-    PROPERTIES
-      CXX_STANDARD 17
-      CXX_STANDARD_REQUIRED YES
-      CXX_EXTENSIONS NO
-)
