@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include <uniTypesTest.h>
+
 // Include all of the test files we want to run.
 
 int main(int argc, char* argv[]) {
