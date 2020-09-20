@@ -1,14 +1,20 @@
-# REPO NAME
+# uniTypes
 
 # Table of Contents
 
-+ [Building](#building)
-    + [Building The App From Scratch](#building-the-app-from-scratch)
-    + [Building The App Without Rebuilding The Testing Framework](#building-the-app-without-rebuilding-the-testing-framework)
-+ [Testing](#testing)
-    + [Running Tests](#running-tests)
-    + [Writing Tests](#writing-tests)
+- [uniTypes](#unitypes)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Building](#building)
+  - [Building The App From Scratch](#building-the-app-from-scratch)
+  - [Building The App Without Rebuilding The Testing Framework](#building-the-app-without-rebuilding-the-testing-framework)
+- [Testing](#testing)
+  - [Running Tests](#running-tests)
+  - [Writing Tests](#writing-tests)
 
+# Overview
+
+A header only implementations of units that I use for other projects. This is based heavily on [this writeup](https://benjaminjurke.com/content/articles/2015/compile-time-numerical-unit-dimension-checking/).
 
 # Building
 
