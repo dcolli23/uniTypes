@@ -129,6 +129,7 @@ namespace uniTypes {
   // Our predefined mass units.
   Mass kilogram(1.0);
   Mass gram = 0.001 * kilogram;
+  Mass milligram = 0.001 * gram;
   Mass ton = 1000.0 * kilogram;
   Mass ounce = 0.028349523125 * kilogram;
   Mass pound = 16 * ounce;
@@ -200,11 +201,13 @@ namespace uniTypes {
     // Mass literals.
     Mass operator"" _kg(long double x){ return static_cast<double>(x) * kilogram; }
     Mass operator"" _g(long double x){ return static_cast<double>(x) * gram; }
+    Mass operator"" _mg(long double x){ return static_cast<double>(x) * milligram; }
     Mass operator"" _tn(long double x){ return static_cast<double>(x) * ton; }
     Mass operator"" _oz(long double x){ return static_cast<double>(x) * ounce; }
     Mass operator"" _lb(long double x){ return static_cast<double>(x) * pound; }
     Mass operator"" _kg(unsigned long long int x){ return static_cast<double>(x) * kilogram; }
     Mass operator"" _g(unsigned long long int x){ return static_cast<double>(x) * gram; }
+    Mass operator"" _mg(unsigned long long int x){ return static_cast<double>(x) * milligram; }
     Mass operator"" _tn(unsigned long long int x){ return static_cast<double>(x) * ton; }
     Mass operator"" _oz(unsigned long long int x){ return static_cast<double>(x) * ounce; }
     Mass operator"" _lb(unsigned long long int x){ return static_cast<double>(x) * pound; }
