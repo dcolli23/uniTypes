@@ -8,6 +8,11 @@ else
   cd build
 fi
 
+if [ -f test_main ]
+then
+  rm test_main
+fi
+
 cmake -DRUN_TESTS=ON ..
 make
 
