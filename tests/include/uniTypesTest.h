@@ -2,6 +2,7 @@
 #include "gtest/gtest.h"
 
 #include <iostream>
+#include <string>
 
 // For using the string literal operators.
 using namespace uniTypes::string_literals;
@@ -91,13 +92,38 @@ TEST(uniTypesTest, ComparisonTest) {
   ASSERT_TRUE(test_var == truth_var);
 }
 
-TEST(uniTypesTest, WrongUnitAdditionTest) {
-  uniTypes::Length length_var = 12.0_mi;
-  uniTypes::Volume volume_var = 1.0_gal;
-  length_var += volume_var;
+TEST(uniTypesTypeMapTest, TypeMapMassTest) {
+  uniTypes::Mass truth_var = 25.5_g;
+  uniTypes::Mass test_unit = uniTypes::string_to_mass_unit.at("g");
+  uniTypes::Mass test_var = 25.5 * test_unit;
+
+  EXPECT_NEAR(test_var.convertTo(uniTypes::gram), truth_var.convertTo(uniTypes::gram),
+    ERROR_TOLERANCE);
 }
 
-// TEST(uniTypesTypeMapTest, TypeMapMassTest) {
-//   uniTypes::Mass test_var = 25.5_g;
-//   uniTypes::type_maps::type_map["g"] = 25.5 * uniTypes::type_maps::mass_unit_map["g"]
+TEST(uniTypesTypeMapTest, TypeMapVolumeTest) {
+  uniTypes::Volume truth_var = 13.34_qt;
+  uniTypes::Volume test_unit = uniTypes::string_to_volume_unit.at("quart");
+  uniTypes::Volume test_var = 13.34 * test_unit;
+
+  EXPECT_NEAR(test_var.convertTo(uniTypes::quart), truth_var.convertTo(uniTypes::quart),
+    ERROR_TOLERANCE);
+}
+
+// TEST(uniTypesTypeMapTest, TypeMapLengthTest) {
+//   uniTypes::Length truth_var = 87.75_m;
+//   uniTypes::Length test_unit = uniTypes::string_to_length_unit.at("m");
+//   uniTypes::Length test_var = 87.75 * test_unit;
+
+//   EXPECT_NEAR(test_var.convertTo(uniTypes::foot), truth_var.convertTo(uniTypes::foot),
+//     ERROR_TOLERANCE);
+// }
+
+// TEST(uniTypesTypeMapTest, TypeMapAreaTest) {
+//   uniTypes::Area truth_var = 9.475 * uniTypes::meter2;
+//   uniTypes::Area test_unit = uniTypes::string_to_area_unit.at("m2");
+//   uniTypes::Area test_var = 9.475 * test_unit;
+
+//   EXPECT_NEAR(test_var.convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2),
+//     ERROR_TOLERANCE);
 // }

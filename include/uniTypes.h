@@ -3,11 +3,16 @@
 #include <map>
 #include <unordered_map>
 #include <string>
+#include <functional>
 
 namespace uniTypes {
+  class RatioBaseClass {
+
+  };
+
   // This should not be instantiated directly! Instead use the typedefs below.
   template<typename MassDim, typename LengthDim>
-  class RatioQuantity : public BaseRatioQuantity {
+  class RatioQuantity : public RatioBaseClass {
   public:
     RatioQuantity() : value(0.0) {}
     RatioQuantity(double val) : value(val) {}
@@ -235,11 +240,31 @@ namespace uniTypes {
     Volume operator "" _tsp(unsigned long long int x){ return static_cast<double>(x) * teaspoon; }
   }
 
-  namespace type_maps {
-    BaseRatioQuantity* my_p = new uniTypes::Mass(0.5);
-    void myfunc() {
-      std::cout << my_p->getValue() << endl;
-    }
-  }
+  // Create maps for mapping string to uniTypes type.
+  
+  using mass_map_t = std::map<std::string, uniTypes::Mass>;
+  static const mass_map_t string_to_mass_unit{
+    {"kilogram", uniTypes::kilogram}, {"kg", uniTypes::kilogram},
+    {"gram", uniTypes::gram}, {"g", uniTypes::gram},
+    {"milligram", uniTypes::milligram}, {"mg", uniTypes::milligram},
+    {"ton", uniTypes::ton}, {"tn", uniTypes::ton},
+    {"ounce", uniTypes::ounce}, {"oz", uniTypes::ounce},
+    {"pound", uniTypes::pound}, {"lb", uniTypes::pound},
+  };
+
+  using volume_map_t = std::map<std::string, uniTypes::Volume>;
+  static const volume_map_t string_to_volume_unit{
+    {"milliliter", uniTypes::milliliter}, {"ml", uniTypes::milliliter},
+    {"liter", uniTypes::liter}, {"l", uniTypes::liter},
+    {"gallon", uniTypes::gallon}, {"gal", uniTypes::gallon},
+    {"quart", uniTypes::quart}, {"qt", uniTypes::quart},
+    {"cup", uniTypes::cup}, {"c", uniTypes::cup},
+    {"fluid ounce", uniTypes::floz}, {"floz", uniTypes::floz}, {"fl", uniTypes::floz},
+    {"tablespoon", uniTypes::tablespoon}, {"tbsp", uniTypes::tablespoon},
+    {"teaspoon", uniTypes::teaspoon}, {"tsp", uniTypes::teaspoon}
+  };
+  
+  // TODO: Add streaming functions that print out unit by finding unit that leads to least amount of
+  // significant digits.
 
 }
