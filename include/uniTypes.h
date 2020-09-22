@@ -1,10 +1,13 @@
 #pragma once
 #include <ratio>
+#include <map>
+#include <unordered_map>
+#include <string>
 
 namespace uniTypes {
   // This should not be instantiated directly! Instead use the typedefs below.
   template<typename MassDim, typename LengthDim>
-  class RatioQuantity {
+  class RatioQuantity : public BaseRatioQuantity {
   public:
     RatioQuantity() : value(0.0) {}
     RatioQuantity(double val) : value(val) {}
@@ -230,6 +233,13 @@ namespace uniTypes {
     Volume operator "" _fl(unsigned long long int x){ return static_cast<double>(x) * floz; }
     Volume operator "" _tbsp(unsigned long long int x){ return static_cast<double>(x) * tablespoon; }
     Volume operator "" _tsp(unsigned long long int x){ return static_cast<double>(x) * teaspoon; }
+  }
+
+  namespace type_maps {
+    BaseRatioQuantity* my_p = new uniTypes::Mass(0.5);
+    void myfunc() {
+      std::cout << my_p->getValue() << endl;
+    }
   }
 
 }

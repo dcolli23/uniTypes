@@ -90,3 +90,14 @@ TEST(uniTypesTest, ComparisonTest) {
   uniTypes::Length truth_var = (12.0 * 5280.0) * uniTypes::foot;
   ASSERT_TRUE(test_var == truth_var);
 }
+
+TEST(uniTypesTest, WrongUnitAdditionTest) {
+  uniTypes::Length length_var = 12.0_mi;
+  uniTypes::Volume volume_var = 1.0_gal;
+  length_var += volume_var;
+}
+
+// TEST(uniTypesTypeMapTest, TypeMapMassTest) {
+//   uniTypes::Mass test_var = 25.5_g;
+//   uniTypes::type_maps::type_map["g"] = 25.5 * uniTypes::type_maps::mass_unit_map["g"]
+// }
