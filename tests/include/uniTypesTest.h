@@ -7,31 +7,47 @@
 // For using the string literal operators.
 using namespace uniTypes::string_literals;
 
-double ERROR_TOLERANCE = 1e-10;
-
 TEST(uniTypesTest, testKilogramInit){
   uniTypes::Mass test_var = 100_kg;
   double num_kg_test = test_var.convertTo(uniTypes::kilogram);
-  ASSERT_NEAR(num_kg_test, 100, ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(num_kg_test, 100);
 }
 
 TEST(uniTypesTest, testLiterInit){
   uniTypes::Volume test_var = 123_liter;
   double num_liters_test = test_var.convertTo(uniTypes::liter);
-  ASSERT_NEAR(num_liters_test, 123, ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(num_liters_test, 123);
 }
 
 TEST(uniTypesTest, CupToFlozTest) {
   uniTypes::Volume test_var = 64_cup;
   double num_floz_test = test_var.convertTo(uniTypes::floz);
   double num_floz_truth = 64.0 * 8.0;
-  ASSERT_NEAR(num_floz_test, num_floz_truth, ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(num_floz_test, num_floz_truth);
 }
 
 TEST(uniTypesTest, GallonQuartConversionTest) {
   uniTypes::Volume test_var = 25_gal;
   double num_quarts_test = test_var.convertTo(uniTypes::quart);
-  ASSERT_NEAR(num_quarts_test, 100, ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(num_quarts_test, 100);
+}
+
+TEST(uniTypesTest, SecondInitTest) {
+  uniTypes::Time test_var = 60.0_s;
+  double num_seconds_test = test_var.convertTo(uniTypes::second);
+  EXPECT_FLOAT_EQ(num_seconds_test, 60.0);
+}
+
+TEST(uniTypesTest, KCalInitTest) {
+  uniTypes::Energy test_var = 256.0_kcal;
+  double num_kcal_test = test_var.convertTo(uniTypes::kcal);
+  EXPECT_FLOAT_EQ(num_kcal_test, 256.0);
+}
+
+TEST(uniTypesTest, NewtonInitTest) {
+  uniTypes::Force test_var = 10.0_N;
+  double num_newton_test = test_var.convertTo(uniTypes::newton);
+  EXPECT_FLOAT_EQ(num_newton_test, 10.0);
 }
 
 TEST(uniTypesTest, AdditionTest) {
@@ -39,8 +55,7 @@ TEST(uniTypesTest, AdditionTest) {
   uniTypes::Length test_var_2 = 25_m;
   uniTypes::Length test_var = test_var_1 + test_var_2;
   uniTypes::Length truth_var = 35_m;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::meter), truth_var.convertTo(uniTypes::meter), 
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::meter), truth_var.convertTo(uniTypes::meter));
 }
 
 TEST(uniTypesTest, SubtractionTest) {
@@ -48,32 +63,29 @@ TEST(uniTypesTest, SubtractionTest) {
   uniTypes::Mass test_var_2 = 0.3_lb;
   uniTypes::Mass test_var = test_var_1 - test_var_2;
   uniTypes::Mass truth_var = 35.0_lb;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::pound), truth_var.convertTo(uniTypes::pound), 
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::pound), truth_var.convertTo(uniTypes::pound));
 }
 
 TEST(uniTypesTest, MultiplicationTest) {
   uniTypes::Length test_var_1 = 10_cm;
   uniTypes::Area test_var = test_var_1 * test_var_1;
   uniTypes::Area truth_var = 100.0 * uniTypes::centimeter2;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::centimeter2), 
-    truth_var.convertTo(uniTypes::centimeter2), ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::centimeter2), 
+    truth_var.convertTo(uniTypes::centimeter2));
 }
 
 TEST(uniTypesTest, DoubleMultiplicationTest) {
   uniTypes::Area test_var_1 = 75.0 * uniTypes::inch2;
   uniTypes::Area test_var = test_var_1 / 3.0;
   uniTypes::Area truth_var = 25.0 * uniTypes::inch2;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::inch2), truth_var.convertTo(uniTypes::inch2),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::inch2), truth_var.convertTo(uniTypes::inch2));
 }
 
 TEST(uniTypesTest, DoubleMultiplicationReflexiveTest) {
   uniTypes::Area test_var_1 = uniTypes::inch2 * 75.0;
   uniTypes::Area test_var = test_var_1 / 3.0;
   uniTypes::Area truth_var = uniTypes::inch2 * 25.0;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::inch2), truth_var.convertTo(uniTypes::inch2),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::inch2), truth_var.convertTo(uniTypes::inch2));
 }
 
 TEST(uniTypesTest, DivisionTest) {
@@ -81,16 +93,14 @@ TEST(uniTypesTest, DivisionTest) {
   uniTypes::Length test_var_2 = 50.0_m;
   uniTypes::Area test_var = test_var_1 / test_var_2;
   uniTypes::Area truth_var = 2.0 * uniTypes::meter2;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2));
 }
 
 TEST(uniTypesTest, DoubleDivisionTest) {
   uniTypes::Volume test_var_1 = 84_tbsp;
   uniTypes::Volume test_var = test_var_1 / 42.0;
   uniTypes::Volume truth_var = 2.0_tbsp;
-  ASSERT_NEAR(test_var.convertTo(uniTypes::tablespoon), truth_var.convertTo(uniTypes::tablespoon),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::tablespoon), truth_var.convertTo(uniTypes::tablespoon));
 }
 
 // This isn't working great with larger numbers since this is a simple double comparison.
@@ -105,8 +115,7 @@ TEST(uniTypesTypeMapTest, TypeMapMassTest) {
   uniTypes::Mass test_unit = uniTypes::string_to_mass_unit.at("g");
   uniTypes::Mass test_var = 25.5 * test_unit;
 
-  EXPECT_NEAR(test_var.convertTo(uniTypes::gram), truth_var.convertTo(uniTypes::gram),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::gram), truth_var.convertTo(uniTypes::gram));
 }
 
 TEST(uniTypesTypeMapTest, TypeMapVolumeTest) {
@@ -114,8 +123,7 @@ TEST(uniTypesTypeMapTest, TypeMapVolumeTest) {
   uniTypes::Volume test_unit = uniTypes::string_to_volume_unit.at("quart");
   uniTypes::Volume test_var = 13.34 * test_unit;
 
-  EXPECT_NEAR(test_var.convertTo(uniTypes::quart), truth_var.convertTo(uniTypes::quart),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::quart), truth_var.convertTo(uniTypes::quart));
 }
 
 TEST(uniTypesTypeMapTest, TypeMapLengthTest) {
@@ -123,6 +131,5 @@ TEST(uniTypesTypeMapTest, TypeMapLengthTest) {
   uniTypes::Length test_unit = uniTypes::string_to_length_unit.at("m");
   uniTypes::Length test_var = 87.75 * test_unit;
 
-  EXPECT_NEAR(test_var.convertTo(uniTypes::foot), truth_var.convertTo(uniTypes::foot),
-    ERROR_TOLERANCE);
+  EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::foot), truth_var.convertTo(uniTypes::foot));
 }

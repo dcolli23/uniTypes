@@ -11,7 +11,7 @@ namespace uniTypes {
   };
 
   // This should not be instantiated directly! Instead use the typedefs below.
-  template<typename MassDim, typename LengthDim>
+  template<typename MassDim, typename LengthDim, typename TimeDim>
   class RatioQuantity : public RatioBaseClass {
   public:
     RatioQuantity() : value(0.0) {}
@@ -42,96 +42,106 @@ namespace uniTypes {
   };
 
   // Specify the predefined physical quantity types.
-  #define QUANTITY_TYPE(_Mdim, _Ldim, name) \
-    typedef RatioQuantity<std::ratio<_Mdim>, std::ratio<_Ldim>> name;
+  #define QUANTITY_TYPE(_Mdim, _Ldim, _Tdim, name) \
+    typedef RatioQuantity<std::ratio<_Mdim>, std::ratio<_Ldim>, std::ratio<_Tdim>> name;
 
   // Dimensionless.
-  QUANTITY_TYPE(0, 0, Number);
+  QUANTITY_TYPE(0, 0, 0, Number);
 
-  QUANTITY_TYPE(1, 0, Mass);
-  QUANTITY_TYPE(0, 1, Length);
-  QUANTITY_TYPE(0, 2, Area);
-  QUANTITY_TYPE(0, 3, Volume);
+  QUANTITY_TYPE(1, 0, 0, Mass);
+  QUANTITY_TYPE(0, 1, 0, Length);
+  QUANTITY_TYPE(0, 2, 0, Area);
+  QUANTITY_TYPE(0, 3, 0, Volume);
+  QUANTITY_TYPE(0, 0, 1, Time);
+  QUANTITY_TYPE(1, 1, -2, Force);
+  QUANTITY_TYPE(2, 1, -2, Energy);
 
   // Standard arithmentic operators.
-  template<typename M, typename L>
-  RatioQuantity<M, L> operator+(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs){
+  template<typename M, typename L, typename T>
+  RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
     return RatioQuantity<M, L>(lhs.getValue() + rhs.getValue());
   }
 
-  template<typename M, typename L>
-  RatioQuantity<M, L> operator-(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs){
-    return RatioQuantity<M, L>(lhs.getValue() - rhs.getValue());
+  template<typename M, typename L, typename T>
+  RatioQuantity<M, L, T> operator-(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
+    return RatioQuantity<M, L, T>(lhs.getValue() - rhs.getValue());
   }
 
-  template<typename M, typename L>
-  RatioQuantity<M, L> operator*(double lhs, RatioQuantity<M, L>& rhs){
-    return RatioQuantity<M, L>(lhs * rhs.getValue());
+  template<typename M, typename L, typename T>
+  RatioQuantity<M, L, T> operator*(double lhs, RatioQuantity<M, L, T>& rhs){
+    return RatioQuantity<M, L, T>(lhs * rhs.getValue());
   }
 
-  template<typename M, typename L>
-  RatioQuantity<M, L> operator*(RatioQuantity<M, L>& lhs, double rhs){
-    return RatioQuantity<M, L>(lhs.getValue() * rhs);
+  template<typename M, typename L, typename T>
+  RatioQuantity<M, L, T> operator*(RatioQuantity<M, L, T>& lhs, double rhs){
+    return RatioQuantity<M, L, T>(lhs.getValue() * rhs);
   }
 
-  template<typename M1, typename L1, typename M2, typename L2>
-  RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>> 
-    operator* (RatioQuantity<M1, L1>& lhs, RatioQuantity<M2, L2>& rhs) {
-      return RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>>(
+  template<typename M1, typename L1, typename T1,
+           typename M2, typename L2, typename T2>
+  RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>> 
+    operator* (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) {
+      return RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>>(
         lhs.getValue() * rhs.getValue()
       );
   }
 
-  template<typename M1, typename L1, typename M2, typename L2>
-  RatioQuantity<std::ratio_subtract<M1, M2>, std::ratio_subtract<L1, L2>> 
-    operator/ (RatioQuantity<M1, L1>& lhs, RatioQuantity<M2, L2>& rhs) {
-      return RatioQuantity<std::ratio_subtract<M1, M2>, std::ratio_subtract<L1, L2>>(
-        lhs.getValue() / rhs.getValue()
-      );
+  template<typename M1, typename L1, typename T1,
+           typename M2, typename L2, typename T2>
+  RatioQuantity<std::ratio_subtract<M1, M2>, 
+                std::ratio_subtract<L1, L2>, 
+                std::ratio_subtract<T1, T2>> 
+    operator/ (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) {
+      return RatioQuantity<std::ratio_subtract<M1, M2>, 
+                           std::ratio_subtract<L1, L2>,
+                           std::ratio_subtract<T1, T2>>( lhs.getValue() / rhs.getValue() );
   }
 
-  template <typename M, typename L>
-  RatioQuantity<std::ratio_subtract<std::ratio<0>, M>, std::ratio_subtract<std::ratio<0>, L>> 
-    operator/(double x, RatioQuantity<M, L>& rhs) {
+  template <typename M, typename L, typename T>
+  RatioQuantity<std::ratio_subtract<std::ratio<0>, M>,
+                std::ratio_subtract<std::ratio<0>, L>,
+                std::ratio_subtract<std::ratio<0>, T>> 
+    operator/(double x, RatioQuantity<M, L, T>& rhs) {
       return RatioQuantity<std::ratio_subtract<std::ratio<0>, M>, 
-                          std::ratio_subtract<std::ratio<0>, L>> (x / rhs.getValue());
+                           std::ratio_subtract<std::ratio<0>, L>,
+                           std::ratio_subtract<std::ratio<0>, T>> ( x / rhs.getValue() );
   }
 
-  template<typename M, typename L>
-  RatioQuantity<M, L> operator/(RatioQuantity<M, L>& lhs, double x) {
-    return RatioQuantity<M, L>(lhs.getValue() / x);
+  template<typename M, typename L, typename T>
+  RatioQuantity<M, L, T> operator/(RatioQuantity<M, L, T>& lhs, double x) {
+    return RatioQuantity<M, L, T>( lhs.getValue() / x );
   }
 
   // Comparison operators.
 
   // This isn't working great with larger numbers since this is a simple double comparison.
-  template<typename M, typename L>
-  bool operator==(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs){
+  template<typename M, typename L, typename T>
+  bool operator==(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
     return (lhs.getValue() == rhs.getValue());
   }
 
-  template<typename M, typename L>
-  bool operator!=(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs) {
+  template<typename M, typename L, typename T>
+  bool operator!=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return (lhs.getValue() != rhs.getValue());
   }
 
-  template<typename M, typename L>
-  bool operator<=(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs) {
+  template<typename M, typename L, typename T>
+  bool operator<=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return (lhs.getValue() <= rhs.getValue());
   }
 
-  template<typename M, typename L>
-  bool operator>=(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs) {
+  template<typename M, typename L, typename T>
+  bool operator>=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return (lhs.getValue() >= rhs.getValue());
   }
 
-  template<typename M, typename L>
-  bool operator<(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs) {
+  template<typename M, typename L, typename T>
+  bool operator<(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return (lhs.getValue() < rhs.getValue());
   }
 
-  template<typename M, typename L>
-  bool operator>(RatioQuantity<M, L>& lhs, RatioQuantity<M, L>& rhs) {
+  template<typename M, typename L, typename T>
+  bool operator>(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return (lhs.getValue() > rhs.getValue());
   }
 
@@ -184,6 +194,28 @@ namespace uniTypes {
   Volume floz = cup / 8.0;
   Volume tablespoon = cup / 16.0;
   Volume teaspoon = tablespoon / 3.0;
+
+  Time second(1.0);
+  Time minute = 60.0 * second;
+  Time hour = 60.0 * minute;
+  Time day = 24.0 * hour;
+  Time week = 7.0 * day;
+  Time year = 365.25 * day;
+  Time millisecond = second / 1000.0;
+  Time microsecond = millisecond / 1000.0;
+  Time nanosecond = microsecond / 1000.0;
+
+  Force newton(1.0);
+  Force kilonewton = 1000.0 * newton;
+  Force meganewton = 1000.0 * kilonewton;
+  Force millinewton = newton / 1000.0;
+  Force poundforce = newton * 4.44822271072093;
+
+  Energy joule(1.0);
+  Energy kilojoule = 1000.0 * joule;
+  Energy megajoule = 1000.0 * kilojoule;
+  Energy kilocalorie = 4184.0 * joule;
+  Energy btu = 1055.06 * joule;
 
   // Unit string literals
   namespace string_literals{
@@ -238,6 +270,15 @@ namespace uniTypes {
     Volume operator "" _fl(unsigned long long int x){ return static_cast<double>(x) * floz; }
     Volume operator "" _tbsp(unsigned long long int x){ return static_cast<double>(x) * tablespoon; }
     Volume operator "" _tsp(unsigned long long int x){ return static_cast<double>(x) * teaspoon; }
+  
+    Time operator "" _s(long double x){ return static_cast<double>(x) * second; }
+    Time operator "" _min(long double x) { return static_cast<double>(x) * minute; }
+    Time operator "" _hr(long double x) { return static_cast<double>(x) * hour; }
+    Time operator "" _day(long double x) { return static_cast<double>(x) * day; }
+    Time operator "" _week(long double x) { return static_cast<double>(x) * week; }
+    Time operator "" _year(long double x) { return static_cast<double>(x) * year; }
+    Time operator "" _ms(long double x) { return static_cast<double>(x) * millisecond; }
+    
   }
 
   // Create maps for mapping string to uniTypes type.
