@@ -68,6 +68,14 @@ TEST(uniTypesTest, DoubleMultiplicationTest) {
     ERROR_TOLERANCE);
 }
 
+TEST(uniTypesTest, DoubleMultiplicationReflexiveTest) {
+  uniTypes::Area test_var_1 = uniTypes::inch2 * 75.0;
+  uniTypes::Area test_var = test_var_1 / 3.0;
+  uniTypes::Area truth_var = uniTypes::inch2 * 25.0;
+  ASSERT_NEAR(test_var.convertTo(uniTypes::inch2), truth_var.convertTo(uniTypes::inch2),
+    ERROR_TOLERANCE);
+}
+
 TEST(uniTypesTest, DivisionTest) {
   uniTypes::Volume test_var_1 = 100.0 * uniTypes::meter3;
   uniTypes::Length test_var_2 = 50.0_m;
