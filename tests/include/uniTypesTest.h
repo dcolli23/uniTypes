@@ -40,7 +40,7 @@ TEST(uniTypesTest, SecondInitTest) {
 
 TEST(uniTypesTest, KCalInitTest) {
   uniTypes::Energy test_var = 256.0_kcal;
-  double num_kcal_test = test_var.convertTo(uniTypes::kcal);
+  double num_kcal_test = test_var.convertTo(uniTypes::kilocalorie);
   EXPECT_FLOAT_EQ(num_kcal_test, 256.0);
 }
 

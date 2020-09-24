@@ -59,7 +59,7 @@ namespace uniTypes {
   // Standard arithmentic operators.
   template<typename M, typename L, typename T>
   RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
-    return RatioQuantity<M, L>(lhs.getValue() + rhs.getValue());
+    return RatioQuantity<M, L, T>(lhs.getValue() + rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
@@ -278,7 +278,38 @@ namespace uniTypes {
     Time operator "" _week(long double x) { return static_cast<double>(x) * week; }
     Time operator "" _year(long double x) { return static_cast<double>(x) * year; }
     Time operator "" _ms(long double x) { return static_cast<double>(x) * millisecond; }
-    
+    Time operator "" _ns(long double x) { return static_cast<double>(x) * nanosecond; }
+    Time operator "" _s(unsigned long long int x){ return static_cast<double>(x) * second; }
+    Time operator "" _min(unsigned long long int x) { return static_cast<double>(x) * minute; }
+    Time operator "" _hr(unsigned long long int x) { return static_cast<double>(x) * hour; }
+    Time operator "" _day(unsigned long long int x) { return static_cast<double>(x) * day; }
+    Time operator "" _week(unsigned long long int x) { return static_cast<double>(x) * week; }
+    Time operator "" _year(unsigned long long int x) { return static_cast<double>(x) * year; }
+    Time operator "" _ms(unsigned long long int x) { return static_cast<double>(x) * millisecond; }
+    Time operator "" _ns(unsigned long long int x) { return static_cast<double>(x) * nanosecond; }
+
+    Force operator "" _N(long double x){ return static_cast<double>(x) * newton; }
+    Force operator "" _kN(long double x){ return static_cast<double>(x) * kilonewton; }
+    Force operator "" _MN(long double x){ return static_cast<double>(x) * meganewton; }
+    Force operator "" _mN(long double x){ return static_cast<double>(x) * millinewton; }
+    Force operator "" _lbf(long double x){ return static_cast<double>(x) * poundforce; }
+    Force operator "" _N(unsigned long long int x){ return static_cast<double>(x) * newton; }
+    Force operator "" _kN(unsigned long long int x){ return static_cast<double>(x) * kilonewton; }
+    Force operator "" _MN(unsigned long long int x){ return static_cast<double>(x) * meganewton; }
+    Force operator "" _mN(unsigned long long int x){ return static_cast<double>(x) * millinewton; }
+    Force operator "" _lbf(unsigned long long int x){ return static_cast<double>(x) * poundforce; }
+
+    Energy operator "" _J(long double x){ return static_cast<double>(x) * joule; }
+    Energy operator "" _kJ(long double x){ return static_cast<double>(x) * kilojoule; }
+    Energy operator "" _MJ(long double x){ return static_cast<double>(x) * megajoule; }
+    Energy operator "" _kcal(long double x){ return static_cast<double>(x) * kilocalorie; }
+    Energy operator "" _btu(long double x){ return static_cast<double>(x) * btu; }
+    Energy operator "" _J(unsigned long long int x){ return static_cast<double>(x) * joule; }
+    Energy operator "" _kJ(unsigned long long int x){ return static_cast<double>(x) * kilojoule; }
+    Energy operator "" _MJ(unsigned long long int x){ return static_cast<double>(x) * megajoule; }
+    Energy operator "" _kcal(unsigned long long int x){ return static_cast<double>(x)
+      * kilocalorie; }
+    Energy operator "" _btu(unsigned long long int x){ return static_cast<double>(x) * btu;}
   }
 
   // Create maps for mapping string to uniTypes type.
