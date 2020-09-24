@@ -110,20 +110,11 @@ TEST(uniTypesTypeMapTest, TypeMapVolumeTest) {
     ERROR_TOLERANCE);
 }
 
-// TEST(uniTypesTypeMapTest, TypeMapLengthTest) {
-//   uniTypes::Length truth_var = 87.75_m;
-//   uniTypes::Length test_unit = uniTypes::string_to_length_unit.at("m");
-//   uniTypes::Length test_var = 87.75 * test_unit;
+TEST(uniTypesTypeMapTest, TypeMapLengthTest) {
+  uniTypes::Length truth_var = 87.75_m;
+  uniTypes::Length test_unit = uniTypes::string_to_length_unit.at("m");
+  uniTypes::Length test_var = 87.75 * test_unit;
 
-//   EXPECT_NEAR(test_var.convertTo(uniTypes::foot), truth_var.convertTo(uniTypes::foot),
-//     ERROR_TOLERANCE);
-// }
-
-// TEST(uniTypesTypeMapTest, TypeMapAreaTest) {
-//   uniTypes::Area truth_var = 9.475 * uniTypes::meter2;
-//   uniTypes::Area test_unit = uniTypes::string_to_area_unit.at("m2");
-//   uniTypes::Area test_var = 9.475 * test_unit;
-
-//   EXPECT_NEAR(test_var.convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2),
-//     ERROR_TOLERANCE);
-// }
+  EXPECT_NEAR(test_var.convertTo(uniTypes::foot), truth_var.convertTo(uniTypes::foot),
+    ERROR_TOLERANCE);
+}

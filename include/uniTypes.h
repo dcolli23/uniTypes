@@ -242,26 +242,39 @@ namespace uniTypes {
 
   // Create maps for mapping string to uniTypes type.
   
-  using mass_map_t = std::map<std::string, uniTypes::Mass>;
+  using mass_map_t = std::map<std::string, Mass>;
   static const mass_map_t string_to_mass_unit{
-    {"kilogram", uniTypes::kilogram}, {"kg", uniTypes::kilogram},
-    {"gram", uniTypes::gram}, {"g", uniTypes::gram},
-    {"milligram", uniTypes::milligram}, {"mg", uniTypes::milligram},
-    {"ton", uniTypes::ton}, {"tn", uniTypes::ton},
-    {"ounce", uniTypes::ounce}, {"oz", uniTypes::ounce},
-    {"pound", uniTypes::pound}, {"lb", uniTypes::pound},
+    {"kilogram", kilogram}, {"kg", kilogram},
+    {"gram", gram}, {"g", gram},
+    {"milligram", milligram}, {"mg", milligram},
+    {"ton", ton}, {"tn", ton},
+    {"ounce", ounce}, {"oz", ounce},
+    {"pound", pound}, {"lb", pound},
   };
 
-  using volume_map_t = std::map<std::string, uniTypes::Volume>;
+  using volume_map_t = std::map<std::string, Volume>;
   static const volume_map_t string_to_volume_unit{
-    {"milliliter", uniTypes::milliliter}, {"ml", uniTypes::milliliter},
-    {"liter", uniTypes::liter}, {"l", uniTypes::liter},
-    {"gallon", uniTypes::gallon}, {"gal", uniTypes::gallon},
-    {"quart", uniTypes::quart}, {"qt", uniTypes::quart},
-    {"cup", uniTypes::cup}, {"c", uniTypes::cup},
-    {"fluid ounce", uniTypes::floz}, {"floz", uniTypes::floz}, {"fl", uniTypes::floz},
-    {"tablespoon", uniTypes::tablespoon}, {"tbsp", uniTypes::tablespoon},
-    {"teaspoon", uniTypes::teaspoon}, {"tsp", uniTypes::teaspoon}
+    {"milliliter", milliliter}, {"ml", milliliter},
+    {"liter", liter}, {"l", liter},
+    {"gallon", gallon}, {"gal", gallon},
+    {"quart", quart}, {"qt", quart},
+    {"cup", cup}, {"c", cup},
+    {"fluid ounce", floz}, {"floz", floz}, {"fl", floz},
+    {"tablespoon", tablespoon}, {"tbsp", tablespoon},
+    {"teaspoon", teaspoon}, {"tsp", teaspoon}
+  };
+
+  using length_map_t = std::map<std::string, Length>;
+  static const length_map_t string_to_length_unit{
+    {"meter", meter}, {"m", meter},
+    {"decimeter", decimeter}, {"dm", decimeter},
+    {"centimeter", centimeter}, {"cm", centimeter},
+    {"millimeter", millimeter}, {"mm", millimeter},
+    {"kilometer", kilometer}, {"km", kilometer},
+    {"inch", inch}, {"in", inch},
+    {"foot", foot}, {"ft", foot},
+    {"yard", yard}, {"yd", yard},
+    {"mile", mile}, {"mi", mile}
   };
   
   // TODO: Add streaming functions that print out unit by finding unit that leads to least amount of
