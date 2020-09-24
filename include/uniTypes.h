@@ -86,6 +86,11 @@ namespace uniTypes {
       );
   }
 
+  template<typename M, typename L, typename T>
+  double operator/(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+    return lhs.getValue() / rhs.getValue();
+  }
+
   template<typename M1, typename L1, typename T1,
            typename M2, typename L2, typename T2>
   RatioQuantity<std::ratio_subtract<M1, M2>, 

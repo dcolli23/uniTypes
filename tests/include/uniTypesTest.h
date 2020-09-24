@@ -96,6 +96,13 @@ TEST(uniTypesTest, DivisionTest) {
   EXPECT_FLOAT_EQ(test_var.convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2));
 }
 
+TEST(uniTypesTest, DivisionSameUnitTest) {
+  uniTypes::Area test_var_1 = 100.0 * uniTypes::meter2;
+  uniTypes::Area test_var_2 = 50.0 * uniTypes::meter2;
+  double multiples_area = test_var_1 / test_var_2;
+  EXPECT_FLOAT_EQ(multiples_area, 2.0);
+}
+
 TEST(uniTypesTest, DoubleDivisionTest) {
   uniTypes::Volume test_var_1 = 84_tbsp;
   uniTypes::Volume test_var = test_var_1 / 42.0;
