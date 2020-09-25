@@ -58,57 +58,69 @@ namespace uniTypes {
 
   // Standard arithmentic operators.
   template<typename M, typename L, typename T>
-  RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
+  inline RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T>& lhs, 
+                                          RatioQuantity<M, L, T>& rhs)
+  {
     return RatioQuantity<M, L, T>(lhs.getValue() + rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  RatioQuantity<M, L, T> operator-(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
+  inline RatioQuantity<M, L, T> operator-(RatioQuantity<M, L, T>& lhs, 
+                                          RatioQuantity<M, L, T>& rhs)
+  {
     return RatioQuantity<M, L, T>(lhs.getValue() - rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  RatioQuantity<M, L, T> operator*(double lhs, RatioQuantity<M, L, T>& rhs){
+  inline RatioQuantity<M, L, T> operator*(double lhs, 
+                                          RatioQuantity<M, L, T>& rhs)
+  {
     return RatioQuantity<M, L, T>(lhs * rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  RatioQuantity<M, L, T> operator*(RatioQuantity<M, L, T>& lhs, double rhs){
+  inline RatioQuantity<M, L, T> operator*(RatioQuantity<M, L, T>& lhs, 
+                                          double rhs)
+  {
     return RatioQuantity<M, L, T>(lhs.getValue() * rhs);
   }
 
   template<typename M1, typename L1, typename T1,
            typename M2, typename L2, typename T2>
-  RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>> 
-    operator* (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) {
-      return RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>>(
-        lhs.getValue() * rhs.getValue()
-      );
+  inline RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>> 
+    operator* (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) 
+  {
+      return RatioQuantity<std::ratio_add<M1, M2>, 
+                           std::ratio_add<L1, L2>, 
+                           std::ratio_add<T1, T2>> ( lhs.getValue() * rhs.getValue() );
   }
 
   template<typename M1, typename L1, typename T1,
            typename M2, typename L2, typename T2>
-  RatioQuantity<std::ratio_subtract<M1, M2>, 
-                std::ratio_subtract<L1, L2>, 
-                std::ratio_subtract<T1, T2>> 
-    operator/ (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) {
+  inline RatioQuantity<std::ratio_subtract<M1, M2>, 
+                       std::ratio_subtract<L1, L2>, 
+                       std::ratio_subtract<T1, T2>> 
+    operator/ (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) 
+  {
       return RatioQuantity<std::ratio_subtract<M1, M2>, 
                            std::ratio_subtract<L1, L2>,
                            std::ratio_subtract<T1, T2>>( lhs.getValue() / rhs.getValue() );
   }
 
   template <typename M, typename L, typename T>
-  RatioQuantity<std::ratio_subtract<std::ratio<0>, M>,
-                std::ratio_subtract<std::ratio<0>, L>,
-                std::ratio_subtract<std::ratio<0>, T>> 
-    operator/(double x, RatioQuantity<M, L, T>& rhs) {
+  inline RatioQuantity<std::ratio_subtract<std::ratio<0>, M>,
+                       std::ratio_subtract<std::ratio<0>, L>,
+                       std::ratio_subtract<std::ratio<0>, T>> 
+    operator/(double x, RatioQuantity<M, L, T>& rhs) 
+  {
       return RatioQuantity<std::ratio_subtract<std::ratio<0>, M>, 
                            std::ratio_subtract<std::ratio<0>, L>,
                            std::ratio_subtract<std::ratio<0>, T>> ( x / rhs.getValue() );
   }
 
   template<typename M, typename L, typename T>
-  RatioQuantity<M, L, T> operator/(RatioQuantity<M, L, T>& lhs, double x) {
+  inline RatioQuantity<M, L, T> operator/(RatioQuantity<M, L, T>& lhs, double x) 
+  {
     return RatioQuantity<M, L, T>( lhs.getValue() / x );
   }
 
@@ -116,32 +128,38 @@ namespace uniTypes {
 
   // This isn't working great with larger numbers since this is a simple double comparison.
   template<typename M, typename L, typename T>
-  bool operator==(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs){
+  inline bool operator==(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs)
+  {
     return (lhs.getValue() == rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  bool operator!=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline bool operator!=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  {
     return (lhs.getValue() != rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  bool operator<=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline bool operator<=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  {
     return (lhs.getValue() <= rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  bool operator>=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline bool operator>=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  {
     return (lhs.getValue() >= rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  bool operator<(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline bool operator<(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  {
     return (lhs.getValue() < rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  bool operator>(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline bool operator>(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  {
     return (lhs.getValue() > rhs.getValue());
   }
 
@@ -220,96 +238,96 @@ namespace uniTypes {
   // Unit string literals
   namespace string_literals{
     // Length literals.
-    Length operator"" _m(long double x) { return static_cast<double>(x) * meter; }
-    Length operator"" _dm(long double x) { return static_cast<double>(x) * decimeter; }
-    Length operator"" _cm(long double x) { return static_cast<double>(x) * centimeter; }
-    Length operator"" _mm(long double x){ return static_cast<double>(x) * millimeter; }
-    Length operator"" _km(long double x){ return static_cast<double>(x) * kilometer; }
-    Length operator"" _in(long double x){ return static_cast<double>(x) * inch; }
-    Length operator"" _ft(long double x){ return static_cast<double>(x) * foot; }
-    Length operator"" _yd(long double x){ return static_cast<double>(x) * yard; }
-    Length operator"" _mi(long double x){ return static_cast<double>(x) * mile; }
-    Length operator"" _m(unsigned long long int x) { return static_cast<double>(x) * meter; }
-    Length operator"" _dm(unsigned long long int x) { return static_cast<double>(x) * decimeter; }
-    Length operator"" _cm(unsigned long long int x) { return static_cast<double>(x) * centimeter; }
-    Length operator"" _mm(unsigned long long int x){ return static_cast<double>(x) * millimeter; }
-    Length operator"" _km(unsigned long long int x){ return static_cast<double>(x) * kilometer; }
-    Length operator"" _in(unsigned long long int x){ return static_cast<double>(x) * inch; }
-    Length operator"" _ft(unsigned long long int x){ return static_cast<double>(x) * foot; }
-    Length operator"" _yd(unsigned long long int x){ return static_cast<double>(x) * yard; }
-    Length operator"" _mi(unsigned long long int x){ return static_cast<double>(x) * mile; }
+    inline Length operator"" _m(long double x) { return static_cast<double>(x) * meter; }
+    inline Length operator"" _dm(long double x) { return static_cast<double>(x) * decimeter; }
+    inline Length operator"" _cm(long double x) { return static_cast<double>(x) * centimeter; }
+    inline Length operator"" _mm(long double x) { return static_cast<double>(x) * millimeter; }
+    inline Length operator"" _km(long double x) { return static_cast<double>(x) * kilometer; }
+    inline Length operator"" _in(long double x) { return static_cast<double>(x) * inch; }
+    inline Length operator"" _ft(long double x) { return static_cast<double>(x) * foot; }
+    inline Length operator"" _yd(long double x) { return static_cast<double>(x) * yard; }
+    inline Length operator"" _mi(long double x) { return static_cast<double>(x) * mile; }
+    inline Length operator"" _m(unsigned long long int x) { return static_cast<double>(x) * meter; }
+    inline Length operator"" _dm(unsigned long long int x) { return static_cast<double>(x) * decimeter; }
+    inline Length operator"" _cm(unsigned long long int x) { return static_cast<double>(x) * centimeter; }
+    inline Length operator"" _mm(unsigned long long int x) { return static_cast<double>(x) * millimeter; }
+    inline Length operator"" _km(unsigned long long int x) { return static_cast<double>(x) * kilometer; }
+    inline Length operator"" _in(unsigned long long int x) { return static_cast<double>(x) * inch; }
+    inline Length operator"" _ft(unsigned long long int x) { return static_cast<double>(x) * foot; }
+    inline Length operator"" _yd(unsigned long long int x) { return static_cast<double>(x) * yard; }
+    inline Length operator"" _mi(unsigned long long int x) { return static_cast<double>(x) * mile; }
 
     // Mass literals.
-    Mass operator"" _kg(long double x){ return static_cast<double>(x) * kilogram; }
-    Mass operator"" _g(long double x){ return static_cast<double>(x) * gram; }
-    Mass operator"" _mg(long double x){ return static_cast<double>(x) * milligram; }
-    Mass operator"" _tn(long double x){ return static_cast<double>(x) * ton; }
-    Mass operator"" _oz(long double x){ return static_cast<double>(x) * ounce; }
-    Mass operator"" _lb(long double x){ return static_cast<double>(x) * pound; }
-    Mass operator"" _kg(unsigned long long int x){ return static_cast<double>(x) * kilogram; }
-    Mass operator"" _g(unsigned long long int x){ return static_cast<double>(x) * gram; }
-    Mass operator"" _mg(unsigned long long int x){ return static_cast<double>(x) * milligram; }
-    Mass operator"" _tn(unsigned long long int x){ return static_cast<double>(x) * ton; }
-    Mass operator"" _oz(unsigned long long int x){ return static_cast<double>(x) * ounce; }
-    Mass operator"" _lb(unsigned long long int x){ return static_cast<double>(x) * pound; }
+    inline Mass operator"" _kg(long double x) { return static_cast<double>(x) * kilogram; }
+    inline Mass operator"" _g(long double x) { return static_cast<double>(x) * gram; }
+    inline Mass operator"" _mg(long double x) { return static_cast<double>(x) * milligram; }
+    inline Mass operator"" _tn(long double x) { return static_cast<double>(x) * ton; }
+    inline Mass operator"" _oz(long double x) { return static_cast<double>(x) * ounce; }
+    inline Mass operator"" _lb(long double x) { return static_cast<double>(x) * pound; }
+    inline Mass operator"" _kg(unsigned long long int x) { return static_cast<double>(x) * kilogram; }
+    inline Mass operator"" _g(unsigned long long int x) { return static_cast<double>(x) * gram; }
+    inline Mass operator"" _mg(unsigned long long int x) { return static_cast<double>(x) * milligram; }
+    inline Mass operator"" _tn(unsigned long long int x) { return static_cast<double>(x) * ton; }
+    inline Mass operator"" _oz(unsigned long long int x) { return static_cast<double>(x) * ounce; }
+    inline Mass operator"" _lb(unsigned long long int x) { return static_cast<double>(x) * pound; }
 
     // Volume literals.
-    Volume operator "" _ml(long double x){ return static_cast<double>(x) * milliliter; }
-    Volume operator "" _liter(long double x){ return static_cast<double>(x) * liter; }
-    Volume operator "" _gal(long double x){ return static_cast<double>(x) * gallon; }
-    Volume operator "" _qt(long double x){ return static_cast<double>(x) * quart; }
-    Volume operator "" _cup(long double x){ return static_cast<double>(x) * cup; }
-    Volume operator "" _fl(long double x){ return static_cast<double>(x) * floz; }
-    Volume operator "" _tbsp(long double x){ return static_cast<double>(x) * tablespoon; }
-    Volume operator "" _tsp(long double x){ return static_cast<double>(x) * teaspoon; }
-    Volume operator "" _ml(unsigned long long int x){ return static_cast<double>(x) * milliliter; }
-    Volume operator "" _liter(unsigned long long int x){ return static_cast<double>(x) * liter; }
-    Volume operator "" _gal(unsigned long long int x){ return static_cast<double>(x) * gallon; }
-    Volume operator "" _qt(unsigned long long int x){ return static_cast<double>(x) * quart; }
-    Volume operator "" _cup(unsigned long long int x){ return static_cast<double>(x) * cup; }
-    Volume operator "" _fl(unsigned long long int x){ return static_cast<double>(x) * floz; }
-    Volume operator "" _tbsp(unsigned long long int x){ return static_cast<double>(x) * tablespoon; }
-    Volume operator "" _tsp(unsigned long long int x){ return static_cast<double>(x) * teaspoon; }
+    inline Volume operator "" _ml(long double x) { return static_cast<double>(x) * milliliter; }
+    inline Volume operator "" _liter(long double x) { return static_cast<double>(x) * liter; }
+    inline Volume operator "" _gal(long double x) { return static_cast<double>(x) * gallon; }
+    inline Volume operator "" _qt(long double x) { return static_cast<double>(x) * quart; }
+    inline Volume operator "" _cup(long double x) { return static_cast<double>(x) * cup; }
+    inline Volume operator "" _fl(long double x) { return static_cast<double>(x) * floz; }
+    inline Volume operator "" _tbsp(long double x) { return static_cast<double>(x) * tablespoon; }
+    inline Volume operator "" _tsp(long double x) { return static_cast<double>(x) * teaspoon; }
+    inline Volume operator "" _ml(unsigned long long int x) { return static_cast<double>(x) * milliliter; }
+    inline Volume operator "" _liter(unsigned long long int x) { return static_cast<double>(x) * liter; }
+    inline Volume operator "" _gal(unsigned long long int x) { return static_cast<double>(x) * gallon; }
+    inline Volume operator "" _qt(unsigned long long int x) { return static_cast<double>(x) * quart; }
+    inline Volume operator "" _cup(unsigned long long int x) { return static_cast<double>(x) * cup; }
+    inline Volume operator "" _fl(unsigned long long int x) { return static_cast<double>(x) * floz; }
+    inline Volume operator "" _tbsp(unsigned long long int x) { return static_cast<double>(x) * tablespoon; }
+    inline Volume operator "" _tsp(unsigned long long int x) { return static_cast<double>(x) * teaspoon; }
   
-    Time operator "" _s(long double x){ return static_cast<double>(x) * second; }
-    Time operator "" _min(long double x) { return static_cast<double>(x) * minute; }
-    Time operator "" _hr(long double x) { return static_cast<double>(x) * hour; }
-    Time operator "" _day(long double x) { return static_cast<double>(x) * day; }
-    Time operator "" _week(long double x) { return static_cast<double>(x) * week; }
-    Time operator "" _year(long double x) { return static_cast<double>(x) * year; }
-    Time operator "" _ms(long double x) { return static_cast<double>(x) * millisecond; }
-    Time operator "" _ns(long double x) { return static_cast<double>(x) * nanosecond; }
-    Time operator "" _s(unsigned long long int x){ return static_cast<double>(x) * second; }
-    Time operator "" _min(unsigned long long int x) { return static_cast<double>(x) * minute; }
-    Time operator "" _hr(unsigned long long int x) { return static_cast<double>(x) * hour; }
-    Time operator "" _day(unsigned long long int x) { return static_cast<double>(x) * day; }
-    Time operator "" _week(unsigned long long int x) { return static_cast<double>(x) * week; }
-    Time operator "" _year(unsigned long long int x) { return static_cast<double>(x) * year; }
-    Time operator "" _ms(unsigned long long int x) { return static_cast<double>(x) * millisecond; }
-    Time operator "" _ns(unsigned long long int x) { return static_cast<double>(x) * nanosecond; }
+    inline Time operator "" _s(long double x) { return static_cast<double>(x) * second; }
+    inline Time operator "" _min(long double x) { return static_cast<double>(x) * minute; }
+    inline Time operator "" _hr(long double x) { return static_cast<double>(x) * hour; }
+    inline Time operator "" _day(long double x) { return static_cast<double>(x) * day; }
+    inline Time operator "" _week(long double x) { return static_cast<double>(x) * week; }
+    inline Time operator "" _year(long double x) { return static_cast<double>(x) * year; }
+    inline Time operator "" _ms(long double x) { return static_cast<double>(x) * millisecond; }
+    inline Time operator "" _ns(long double x) { return static_cast<double>(x) * nanosecond; }
+    inline Time operator "" _s(unsigned long long int x) { return static_cast<double>(x) * second; }
+    inline Time operator "" _min(unsigned long long int x) { return static_cast<double>(x) * minute; }
+    inline Time operator "" _hr(unsigned long long int x) { return static_cast<double>(x) * hour; }
+    inline Time operator "" _day(unsigned long long int x) { return static_cast<double>(x) * day; }
+    inline Time operator "" _week(unsigned long long int x) { return static_cast<double>(x) * week; }
+    inline Time operator "" _year(unsigned long long int x) { return static_cast<double>(x) * year; }
+    inline Time operator "" _ms(unsigned long long int x) { return static_cast<double>(x) * millisecond; }
+    inline Time operator "" _ns(unsigned long long int x) { return static_cast<double>(x) * nanosecond; }
 
-    Force operator "" _N(long double x){ return static_cast<double>(x) * newton; }
-    Force operator "" _kN(long double x){ return static_cast<double>(x) * kilonewton; }
-    Force operator "" _MN(long double x){ return static_cast<double>(x) * meganewton; }
-    Force operator "" _mN(long double x){ return static_cast<double>(x) * millinewton; }
-    Force operator "" _lbf(long double x){ return static_cast<double>(x) * poundforce; }
-    Force operator "" _N(unsigned long long int x){ return static_cast<double>(x) * newton; }
-    Force operator "" _kN(unsigned long long int x){ return static_cast<double>(x) * kilonewton; }
-    Force operator "" _MN(unsigned long long int x){ return static_cast<double>(x) * meganewton; }
-    Force operator "" _mN(unsigned long long int x){ return static_cast<double>(x) * millinewton; }
-    Force operator "" _lbf(unsigned long long int x){ return static_cast<double>(x) * poundforce; }
+    inline Force operator "" _N(long double x) { return static_cast<double>(x) * newton; }
+    inline Force operator "" _kN(long double x) { return static_cast<double>(x) * kilonewton; }
+    inline Force operator "" _MN(long double x) { return static_cast<double>(x) * meganewton; }
+    inline Force operator "" _mN(long double x) { return static_cast<double>(x) * millinewton; }
+    inline Force operator "" _lbf(long double x) { return static_cast<double>(x) * poundforce; }
+    inline Force operator "" _N(unsigned long long int x) { return static_cast<double>(x) * newton; }
+    inline Force operator "" _kN(unsigned long long int x) { return static_cast<double>(x) * kilonewton; }
+    inline Force operator "" _MN(unsigned long long int x) { return static_cast<double>(x) * meganewton; }
+    inline Force operator "" _mN(unsigned long long int x) { return static_cast<double>(x) * millinewton; }
+    inline Force operator "" _lbf(unsigned long long int x) { return static_cast<double>(x) * poundforce; }
 
-    Energy operator "" _J(long double x){ return static_cast<double>(x) * joule; }
-    Energy operator "" _kJ(long double x){ return static_cast<double>(x) * kilojoule; }
-    Energy operator "" _MJ(long double x){ return static_cast<double>(x) * megajoule; }
-    Energy operator "" _kcal(long double x){ return static_cast<double>(x) * kilocalorie; }
-    Energy operator "" _btu(long double x){ return static_cast<double>(x) * btu; }
-    Energy operator "" _J(unsigned long long int x){ return static_cast<double>(x) * joule; }
-    Energy operator "" _kJ(unsigned long long int x){ return static_cast<double>(x) * kilojoule; }
-    Energy operator "" _MJ(unsigned long long int x){ return static_cast<double>(x) * megajoule; }
-    Energy operator "" _kcal(unsigned long long int x){ return static_cast<double>(x)
+    inline Energy operator "" _J(long double x) { return static_cast<double>(x) * joule; }
+    inline Energy operator "" _kJ(long double x) { return static_cast<double>(x) * kilojoule; }
+    inline Energy operator "" _MJ(long double x) { return static_cast<double>(x) * megajoule; }
+    inline Energy operator "" _kcal(long double x) { return static_cast<double>(x) * kilocalorie; }
+    inline Energy operator "" _btu(long double x) { return static_cast<double>(x) * btu; }
+    inline Energy operator "" _J(unsigned long long int x) { return static_cast<double>(x) * joule; }
+    inline Energy operator "" _kJ(unsigned long long int x) { return static_cast<double>(x) * kilojoule; }
+    inline Energy operator "" _MJ(unsigned long long int x) { return static_cast<double>(x) * megajoule; }
+    inline Energy operator "" _kcal(unsigned long long int x) { return static_cast<double>(x)
       * kilocalorie; }
-    Energy operator "" _btu(unsigned long long int x){ return static_cast<double>(x) * btu;}
+    inline Energy operator "" _btu(unsigned long long int x) { return static_cast<double>(x) * btu;}
   }
 
   // Create maps for mapping string to uniTypes type.
