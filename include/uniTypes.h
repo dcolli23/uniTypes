@@ -96,7 +96,7 @@ namespace uniTypes {
   }
 
   template<typename M, typename L, typename T>
-  double operator/(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline double operator/(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
     return lhs.getValue() / rhs.getValue();
   }
 
