@@ -169,76 +169,76 @@ namespace uniTypes {
   }
 
   // Our predefined mass units.
-  static Mass kilogram(1.0);
-  static Mass gram = 0.001 * kilogram;
-  static Mass milligram = 0.001 * gram;
-  static Mass ton = 1000.0 * kilogram;
-  static Mass ounce = 0.028349523125 * kilogram;
-  static Mass pound = 16 * ounce;
-  static Mass stone = 14 * pound;
+  static inline Mass kilogram(1.0);
+  static inline Mass gram = 0.001 * kilogram;
+  static inline Mass milligram = 0.001 * gram;
+  static inline Mass ton = 1000.0 * kilogram;
+  static inline Mass ounce = 0.028349523125 * kilogram;
+  static inline Mass pound = 16 * ounce;
+  static inline Mass stone = 14 * pound;
 
   // Our predefined length units.
-  static Length meter(1.0);
-  static Length decimeter = meter / 10.0;
-  static Length centimeter = meter / 100.0;
-  static Length millimeter = meter / 1000.0;
-  static Length kilometer = meter * 1000.0;
-  static Length inch = 2.54 * centimeter;
-  static Length foot = 12.0 * inch;
-  static Length yard = 3.0 * foot;
-  static Length mile = 5280.0 * foot;
+  static inline Length meter(1.0);
+  static inline Length decimeter = meter / 10.0;
+  static inline Length centimeter = meter / 100.0;
+  static inline Length millimeter = meter / 1000.0;
+  static inline Length kilometer = meter * 1000.0;
+  static inline Length inch = 2.54 * centimeter;
+  static inline Length foot = 12.0 * inch;
+  static inline Length yard = 3.0 * foot;
+  static inline Length mile = 5280.0 * foot;
 
   // Our predefined area units.
-  static Area kilometer2 = kilometer * kilometer;
-  static Area meter2 = meter * meter;
-  static Area decimeter2 = decimeter * decimeter;
-  static Area centimeter2 = centimeter * centimeter;
-  static Area millimeter2 = millimeter * millimeter;
-  static Area inch2 = inch * inch;
-  static Area foot2 = foot * foot;
-  static Area yard2 = yard * yard;
-  static Area mile2 = mile * mile;
+  static inline Area kilometer2 = kilometer * kilometer;
+  static inline Area meter2 = meter * meter;
+  static inline Area decimeter2 = decimeter * decimeter;
+  static inline Area centimeter2 = centimeter * centimeter;
+  static inline Area millimeter2 = millimeter * millimeter;
+  static inline Area inch2 = inch * inch;
+  static inline Area foot2 = foot * foot;
+  static inline Area yard2 = yard * yard;
+  static inline Area mile2 = mile * mile;
 
   // Our predefined volume units.
-  static Volume kilometer3 = kilometer2 * kilometer;
-  static Volume meter3 = meter2 * meter;
-  static Volume decimeter3 = decimeter2 * decimeter;
-  static Volume centimeter3 = centimeter2 * centimeter;
-  static Volume milliliter = centimeter3;
-  static Volume liter = 1000.0 * milliliter;
-  static Volume millimeter3 = millimeter2 * millimeter;
-  static Volume inch3 = inch2 * inch;
-  static Volume foot3 = foot2 * foot;
-  static Volume yard3 = yard2 * yard;
-  static Volume mile3 = mile2 * mile;
-  static Volume gallon = 3.78541 * liter;
-  static Volume quart = gallon / 4.0;
-  static Volume cup = quart / 2.0;
-  static Volume floz = cup / 8.0;
-  static Volume tablespoon = cup / 16.0;
-  static Volume teaspoon = tablespoon / 3.0;
+  static inline Volume kilometer3 = kilometer2 * kilometer;
+  static inline Volume meter3 = meter2 * meter;
+  static inline Volume decimeter3 = decimeter2 * decimeter;
+  static inline Volume centimeter3 = centimeter2 * centimeter;
+  static inline Volume milliliter = centimeter3;
+  static inline Volume liter = 1000.0 * milliliter;
+  static inline Volume millimeter3 = millimeter2 * millimeter;
+  static inline Volume inch3 = inch2 * inch;
+  static inline Volume foot3 = foot2 * foot;
+  static inline Volume yard3 = yard2 * yard;
+  static inline Volume mile3 = mile2 * mile;
+  static inline Volume gallon = 3.78541 * liter;
+  static inline Volume quart = gallon / 4.0;
+  static inline Volume cup = quart / 2.0;
+  static inline Volume floz = cup / 8.0;
+  static inline Volume tablespoon = cup / 16.0;
+  static inline Volume teaspoon = tablespoon / 3.0;
 
-  static Time second(1.0);
-  static Time minute = 60.0 * second;
-  static Time hour = 60.0 * minute;
-  static Time day = 24.0 * hour;
-  static Time week = 7.0 * day;
-  static Time year = 365.25 * day;
-  static Time millisecond = second / 1000.0;
-  static Time microsecond = millisecond / 1000.0;
-  static Time nanosecond = microsecond / 1000.0;
+  static inline Time second(1.0);
+  static inline Time minute = 60.0 * second;
+  static inline Time hour = 60.0 * minute;
+  static inline Time day = 24.0 * hour;
+  static inline Time week = 7.0 * day;
+  static inline Time year = 365.25 * day;
+  static inline Time millisecond = second / 1000.0;
+  static inline Time microsecond = millisecond / 1000.0;
+  static inline Time nanosecond = microsecond / 1000.0;
 
-  static Force newton(1.0);
-  static Force kilonewton = 1000.0 * newton;
-  static Force meganewton = 1000.0 * kilonewton;
-  static Force millinewton = newton / 1000.0;
-  static Force poundforce = newton * 4.44822271072093;
+  static inline Force newton(1.0);
+  static inline Force kilonewton = 1000.0 * newton;
+  static inline Force meganewton = 1000.0 * kilonewton;
+  static inline Force millinewton = newton / 1000.0;
+  static inline Force poundforce = newton * 4.44822271072093;
 
-  static Energy joule(1.0);
-  static Energy kilojoule = 1000.0 * joule;
-  static Energy megajoule = 1000.0 * kilojoule;
-  static Energy kilocalorie = 4184.0 * joule;
-  static Energy btu = 1055.06 * joule;
+  static inline Energy joule(1.0);
+  static inline Energy kilojoule = 1000.0 * joule;
+  static inline Energy megajoule = 1000.0 * kilojoule;
+  static inline Energy kilocalorie = 4184.0 * joule;
+  static inline Energy btu = 1055.06 * joule;
 
   // Unit string literals
   namespace string_literals{

@@ -14,11 +14,13 @@
 
 # Overview
 
-A header only implementations of units that I use for other projects. This is based heavily on [this writeup](https://benjaminjurke.com/content/articles/2015/compile-time-numerical-unit-dimension-checking/).
+A header only implementation of units that I use for other projects. This was initially based  on [this writeup](https://benjaminjurke.com/content/articles/2015/compile-time-numerical-unit-dimension-checking/) but has since grown in complexity to address problems/features I needed as they arose.
 
 # Building
 
 This project is built using CMake. I've included several bash scripts to aid in building this project.
+
+Note that this project requires C++ 17.
 
 ## Building The App From Scratch
 
