@@ -50,6 +50,12 @@ TEST(uniTypesTest, NewtonInitTest) {
   EXPECT_FLOAT_EQ(num_newton_test, 10.0);
 }
 
+TEST(uniTypesTest, IUInitTest) {
+  uniTypes::UOBA test_var = 135.5_IU;
+  double num_iu_test = test_var.convertTo(uniTypes::IU);
+  EXPECT_FLOAT_EQ(num_iu_test, 135.5);
+}
+
 TEST(uniTypesTest, AdditionTest) {
   uniTypes::Length test_var_1 = 10_m;
   uniTypes::Length test_var_2 = 25_m;

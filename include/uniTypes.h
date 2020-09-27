@@ -44,6 +44,11 @@ namespace uniTypes {
   // Dimensionless.
   QUANTITY_TYPE(0, 0, 0, Number);
 
+  // International Unit. Standardized unit of biological activity. No direct conversion to mass so
+  // it is therefore defined as dimensionless.
+  // UOBA stands for "unit of biological activity" here.
+  QUANTITY_TYPE(0, 0, 0, UOBA);
+
   QUANTITY_TYPE(1, 0, 0, Mass);
   QUANTITY_TYPE(0, 1, 0, Length);
   QUANTITY_TYPE(0, 2, 0, Area);
@@ -164,6 +169,9 @@ namespace uniTypes {
     return (lhs.getValue() > rhs.getValue());
   }
 
+  // International Units.
+  static inline UOBA IU(1.0);
+
   // Our predefined mass units.
   static inline Mass kilogram(1.0);
   static inline Mass gram = 0.001 * kilogram;
@@ -238,6 +246,10 @@ namespace uniTypes {
 
   // Unit string literals
   namespace string_literals{
+    // IU literals.
+    inline UOBA operator "" _IU(long double x) { return static_cast<double>(x) * IU; }
+    inline UOBA operator "" _IU(unsigned long long int x) { return static_cast<double>(x) * IU; }
+
     // Length literals.
     inline Length operator"" _m(long double x) { return static_cast<double>(x) * meter; }
     inline Length operator"" _dm(long double x) { return static_cast<double>(x) * decimeter; }
