@@ -6,13 +6,9 @@
 #include <functional>
 
 namespace uniTypes {
-  class RatioBaseClass {
-
-  };
-
   // This should not be instantiated directly! Instead use the typedefs below.
   template<typename MassDim, typename LengthDim, typename TimeDim>
-  class RatioQuantity : public RatioBaseClass {
+  class RatioQuantity {
   public:
     RatioQuantity() : value(0.0) {}
     RatioQuantity(double val) : value(val) {}
