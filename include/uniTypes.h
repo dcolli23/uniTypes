@@ -17,18 +17,18 @@ namespace uniTypes {
     RatioQuantity() : value(0.0) {}
     RatioQuantity(double val) : value(val) {}
 
-    RatioQuantity& operator+=(RatioQuantity& rhs){
+    RatioQuantity operator+=(RatioQuantity rhs){
       value += rhs.value;
       return *this;
     }
 
-    RatioQuantity& operator-=(RatioQuantity& rhs){
+    RatioQuantity operator-=(RatioQuantity rhs){
       value -= rhs.value;
       return *this;
     }
 
     // Return value of the quantity in multiples of the specified unit.
-    double convertTo(RatioQuantity& rhs) {
+    double convertTo(RatioQuantity rhs) {
       return value / rhs.value;
     }
 
@@ -58,28 +58,28 @@ namespace uniTypes {
 
   // Standard arithmentic operators.
   template<typename M, typename L, typename T>
-  inline RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T>& lhs, 
-                                          RatioQuantity<M, L, T>& rhs)
+  inline RatioQuantity<M, L, T> operator+(RatioQuantity<M, L, T> lhs, 
+                                          RatioQuantity<M, L, T> rhs)
   {
     return RatioQuantity<M, L, T>(lhs.getValue() + rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline RatioQuantity<M, L, T> operator-(RatioQuantity<M, L, T>& lhs, 
-                                          RatioQuantity<M, L, T>& rhs)
+  inline RatioQuantity<M, L, T> operator-(RatioQuantity<M, L, T> lhs, 
+                                          RatioQuantity<M, L, T> rhs)
   {
     return RatioQuantity<M, L, T>(lhs.getValue() - rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
   inline RatioQuantity<M, L, T> operator*(double lhs, 
-                                          RatioQuantity<M, L, T>& rhs)
+                                          RatioQuantity<M, L, T> rhs)
   {
     return RatioQuantity<M, L, T>(lhs * rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline RatioQuantity<M, L, T> operator*(RatioQuantity<M, L, T>& lhs, 
+  inline RatioQuantity<M, L, T> operator*(RatioQuantity<M, L, T> lhs, 
                                           double rhs)
   {
     return RatioQuantity<M, L, T>(lhs.getValue() * rhs);
@@ -88,7 +88,7 @@ namespace uniTypes {
   template<typename M1, typename L1, typename T1,
            typename M2, typename L2, typename T2>
   inline RatioQuantity<std::ratio_add<M1, M2>, std::ratio_add<L1, L2>, std::ratio_add<T1, T2>> 
-    operator* (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) 
+    operator* (RatioQuantity<M1, L1, T1> lhs, RatioQuantity<M2, L2, T2> rhs) 
   {
       return RatioQuantity<std::ratio_add<M1, M2>, 
                            std::ratio_add<L1, L2>, 
@@ -96,7 +96,7 @@ namespace uniTypes {
   }
 
   template<typename M, typename L, typename T>
-  inline double operator/(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) {
+  inline double operator/(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) {
     return lhs.getValue() / rhs.getValue();
   }
 
@@ -105,7 +105,7 @@ namespace uniTypes {
   inline RatioQuantity<std::ratio_subtract<M1, M2>, 
                        std::ratio_subtract<L1, L2>, 
                        std::ratio_subtract<T1, T2>> 
-    operator/ (RatioQuantity<M1, L1, T1>& lhs, RatioQuantity<M2, L2, T2>& rhs) 
+    operator/ (RatioQuantity<M1, L1, T1> lhs, RatioQuantity<M2, L2, T2> rhs) 
   {
       return RatioQuantity<std::ratio_subtract<M1, M2>, 
                            std::ratio_subtract<L1, L2>,
@@ -116,7 +116,7 @@ namespace uniTypes {
   inline RatioQuantity<std::ratio_subtract<std::ratio<0>, M>,
                        std::ratio_subtract<std::ratio<0>, L>,
                        std::ratio_subtract<std::ratio<0>, T>> 
-    operator/(double x, RatioQuantity<M, L, T>& rhs) 
+    operator/(double x, RatioQuantity<M, L, T> rhs) 
   {
       return RatioQuantity<std::ratio_subtract<std::ratio<0>, M>, 
                            std::ratio_subtract<std::ratio<0>, L>,
@@ -124,7 +124,7 @@ namespace uniTypes {
   }
 
   template<typename M, typename L, typename T>
-  inline RatioQuantity<M, L, T> operator/(RatioQuantity<M, L, T>& lhs, double x) 
+  inline RatioQuantity<M, L, T> operator/(RatioQuantity<M, L, T> lhs, double x) 
   {
     return RatioQuantity<M, L, T>( lhs.getValue() / x );
   }
@@ -133,37 +133,37 @@ namespace uniTypes {
 
   // This isn't working great with larger numbers since this is a simple double comparison.
   template<typename M, typename L, typename T>
-  inline bool operator==(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs)
+  inline bool operator==(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs)
   {
     return (lhs.getValue() == rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline bool operator!=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  inline bool operator!=(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) 
   {
     return (lhs.getValue() != rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline bool operator<=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  inline bool operator<=(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) 
   {
     return (lhs.getValue() <= rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline bool operator>=(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  inline bool operator>=(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) 
   {
     return (lhs.getValue() >= rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline bool operator<(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  inline bool operator<(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) 
   {
     return (lhs.getValue() < rhs.getValue());
   }
 
   template<typename M, typename L, typename T>
-  inline bool operator>(RatioQuantity<M, L, T>& lhs, RatioQuantity<M, L, T>& rhs) 
+  inline bool operator>(RatioQuantity<M, L, T> lhs, RatioQuantity<M, L, T> rhs) 
   {
     return (lhs.getValue() > rhs.getValue());
   }
