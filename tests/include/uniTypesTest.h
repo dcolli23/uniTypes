@@ -56,6 +56,12 @@ TEST(uniTypesTest, IUInitTest) {
   EXPECT_FLOAT_EQ(num_iu_test, 135.5);
 }
 
+TEST(uniTypesTest, FactoryNumberInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(1, 12.5);
+  uniTypes::Mass truth_var = 12.5_kg;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::kilogram), truth_var.convertTo(uniTypes::kilogram));
+}
+
 TEST(uniTypesTest, AdditionTest) {
   uniTypes::Length test_var_1 = 10_m;
   uniTypes::Length test_var_2 = 25_m;

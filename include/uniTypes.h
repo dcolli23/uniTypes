@@ -6,12 +6,20 @@
 #include <functional>
 
 namespace uniTypes {
+  class RatioBase {
+  public:
+    virtual ~RatioBase(){};
+    static RatioBase* createRatio(int choice, double val);
+    // virtual double convertTo();
+  };
+  
   // This should not be instantiated directly! Instead use the typedefs below.
   template<typename MassDim, typename LengthDim, typename TimeDim>
-  class RatioQuantity {
+  class RatioQuantity : public RatioBase {
   public:
     RatioQuantity() : value(0.0) {}
     RatioQuantity(double val) : value(val) {}
+    virtual ~RatioQuantity(){};
 
     RatioQuantity operator+=(RatioQuantity rhs){
       value += rhs.value;
@@ -56,6 +64,35 @@ namespace uniTypes {
   QUANTITY_TYPE(0, 0, 1, Time);
   QUANTITY_TYPE(1, 1, -2, Force);
   QUANTITY_TYPE(2, 1, -2, Energy);
+
+  // ------------------------------------------
+  // RatioBase::createRatio
+  // ------------------------------------------
+  // Factory method for creating derived RatioQuantity from base class.
+  // int choice:
+  //    + 1 - Number
+  //    + 2 - UOBA
+  //    + 3 - Mass
+  //    + 4 - Length
+  //    + 5 - Area
+  //    + 6 - Volume
+  //    + 7 - Time
+  //    + 8 - Force
+  //    + 9 - Energy
+  // double val = 0.0, Value that derived class constructed with.
+  RatioBase* RatioBase::createRatio(int choice, double val=0.0) {
+    switch(choice) {
+      case 1: return new Number(val);
+      case 2: return new UOBA(val);
+      case 3: return new Mass(val);
+      case 4: return new Length(val);
+      case 5: return new Area(val);
+      case 6: return new Volume(val);
+      case 7: return new Time(val);
+      case 8: return new Force(val);
+      case 9: return new Energy(val);
+    }
+  }
 
   // Standard arithmentic operators.
   template<typename M, typename L, typename T>
