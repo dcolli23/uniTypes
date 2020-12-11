@@ -5,6 +5,7 @@
 - [uniTypes](#unitypes)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
+- [Usage](#usage)
 - [Building](#building)
   - [Building The App From Scratch](#building-the-app-from-scratch)
   - [Building The App Without Rebuilding The Testing Framework](#building-the-app-without-rebuilding-the-testing-framework)
@@ -15,6 +16,16 @@
 # Overview
 
 A header only implementation of units that I use for other projects. This was initially based  on [this writeup](https://benjaminjurke.com/content/articles/2015/compile-time-numerical-unit-dimension-checking/) but has since grown in complexity to address problems/features I needed as they arose.
+
+# Usage
+
+uniTypes is a header-only library so using it is as simple as copying the file into your existing project and `#include`-ing it.
+
+Everything in uniTypes is encapsulated in the `uniTypes` namespace. To make use of the custom-defined literals, include the following line in your project files that utilize the literals:
+
+```cpp
+using namespace uniTypes::string_literals;
+```
 
 # Building
 
