@@ -30,7 +30,7 @@ namespace uniTypes {
       this->value = rat.value;
     }
     
-    virtual ~RatioQuantity(){};
+    ~RatioQuantity(){};
 
     RatioQuantity operator+=(RatioQuantity rhs){
       value += rhs.value;
@@ -52,8 +52,6 @@ namespace uniTypes {
       return value;
     }
 
-  // private:
-    // double value;
   };
 
   // Specify the predefined physical quantity types.
