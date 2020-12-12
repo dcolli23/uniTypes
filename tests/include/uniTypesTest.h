@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 // For using the string literal operators.
 using namespace uniTypes::string_literals;
@@ -58,8 +59,73 @@ TEST(uniTypesTest, IUInitTest) {
 
 TEST(uniTypesTest, FactoryNumberInitTest) {
   uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(1, 12.5);
+  uniTypes::Number truth_var = 12.5;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::kilogram), truth_var.convertTo(uniTypes::kilogram));
+}
+
+TEST(uniTypesTest, FactoryUOBAInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(2, 100.01);
+  uniTypes::UOBA truth_var = 100.01_IU;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::IU), truth_var.convertTo(uniTypes::IU));
+}
+
+TEST(uniTypesTest, FactoryMassInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(3, 12.5);
   uniTypes::Mass truth_var = 12.5_kg;
   EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::kilogram), truth_var.convertTo(uniTypes::kilogram));
+}
+
+TEST(uniTypesTest, FactoryLengthInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(4, 10.0);
+  uniTypes::Length truth_var = 10.0_m;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::meter), truth_var.convertTo(uniTypes::meter));
+}
+
+TEST(uniTypesTest, FactoryAreaInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(5, 30.0);
+  uniTypes::Area truth_var = 30.0 * uniTypes::meter2;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::meter2), truth_var.convertTo(uniTypes::meter2));
+}
+
+TEST(uniTypesTest, FactoryVolumeInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(6, 0.005);
+  uniTypes::Volume truth_var = 0.005 * uniTypes::meter3;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::meter3), truth_var.convertTo(uniTypes::meter3));
+}
+
+TEST(uniTypesTest, FactoryTimeInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(7, 13.7);
+  uniTypes::Time truth_var = 13.7_s;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::second), truth_var.convertTo(uniTypes::second));
+}
+
+TEST(uniTypesTest, FactoryForceInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(8, 9.81);
+  uniTypes::Force truth_var = 9.81_N;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::newton), truth_var.convertTo(uniTypes::newton));
+}
+
+TEST(uniTypesTest, FactoryEnergyInitTest) {
+  uniTypes::RatioBase* test_var = uniTypes::RatioBase::createRatio(9, 4.18);
+  uniTypes::Energy truth_var = 4.18_J;
+  EXPECT_FLOAT_EQ(test_var->convertTo(uniTypes::joule), truth_var.convertTo(uniTypes::joule));
+}
+
+TEST(uniTypesTest, MapStorageTest) {
+  std::map<std::string, uniTypes::RatioBase*> unit_map;
+  
+  unit_map["mass"] = new uniTypes::Mass(13.5_g);
+  unit_map["time"] = new uniTypes::Time(60.0_s);
+  
+  uniTypes::Mass mass_truth = 13.5_g;
+  uniTypes::Time time_truth = 60.0_s;
+  
+  EXPECT_FLOAT_EQ(unit_map.at("mass")->convertTo(uniTypes::kilogram), mass_truth.convertTo(uniTypes::kilogram));
+  EXPECT_FLOAT_EQ(unit_map.at("time")->convertTo(uniTypes::second), time_truth.convertTo(uniTypes::second));
+
+  for (auto &it : unit_map) {
+    delete it.second;
+  }
 }
 
 TEST(uniTypesTest, AdditionTest) {

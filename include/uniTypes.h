@@ -8,17 +8,28 @@
 namespace uniTypes {
   class RatioBase {
   public:
-    virtual ~RatioBase(){};
+    RatioBase() : value(0.0) {};
+    RatioBase(double val) : value(val) {};
+    virtual ~RatioBase() {};
     static RatioBase* createRatio(int choice, double val);
-    // virtual double convertTo();
+    virtual double convertTo(RatioBase) {};
+
+    double value;
   };
   
   // This should not be instantiated directly! Instead use the typedefs below.
   template<typename MassDim, typename LengthDim, typename TimeDim>
   class RatioQuantity : public RatioBase {
   public:
-    RatioQuantity() : value(0.0) {}
-    RatioQuantity(double val) : value(val) {}
+    RatioQuantity() : RatioBase(0.0) {}
+    RatioQuantity(double val) : RatioBase(val) {}
+    
+    // Copy constructor
+    RatioQuantity(const RatioQuantity<MassDim, LengthDim, TimeDim> &rat)
+    {
+      this->value = rat.value;
+    }
+    
     virtual ~RatioQuantity(){};
 
     RatioQuantity operator+=(RatioQuantity rhs){
@@ -32,7 +43,7 @@ namespace uniTypes {
     }
 
     // Return value of the quantity in multiples of the specified unit.
-    double convertTo(RatioQuantity rhs) {
+    double convertTo(RatioBase rhs) override {
       return value / rhs.value;
     }
 
@@ -41,8 +52,8 @@ namespace uniTypes {
       return value;
     }
 
-  private:
-    double value;
+  // private:
+    // double value;
   };
 
   // Specify the predefined physical quantity types.
